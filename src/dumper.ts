@@ -4,8 +4,8 @@ import axios from 'axios';
 
 export const CONFIG = {
     DUMP_PATH: process.env.INIT_CWD + '/dump',
-    ITEM_ITERATION: 500,
-    COLOR_ITERATION: 20
+    ITEM_ITERATION: 750,
+    COLOR_ITERATION: 40
 };
 
 const CLOTHES_NAME_MAP = new Map([
