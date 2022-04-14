@@ -63,7 +63,7 @@ export async function dumpClothes(isMale: boolean = true): Promise<void> {
         CLOTHES_NAME_MAP.forEach(async (name, id) => {
             for (let i = 0; i < CONFIG.ITEM_ITERATION; i++) {
                 for (let n = 0; n < CONFIG.COLOR_ITERATION; n++) {
-                    await dumpFile(`https://launcher.gta5grand.com/game/images/${gender}/${id}/${i}_${n}.png`, `${CONFIG.DUMP_PATH}\\clothes\\${gender}\\${name}\\${i}_${n}.png`)
+                    await dumpFile(`https://launcher.gta5grand.com/game/images/${gender}/${id}/${i}_${n}.png`, `${CONFIG.DUMP_PATH}\\clothes\\${gender}\\${name}_${id}\\${i}_${n}.png`)
                         .catch(console.error);
                 }
             }
