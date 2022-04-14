@@ -5,7 +5,7 @@ import axios from 'axios';
 export const CONFIG = {
     DUMP_PATH: process.env.INIT_CWD + '/dump',
     ITEM_ITERATION: 500,
-    COLOR_ITERATION: 30
+    COLOR_ITERATION: 20
 };
 
 const CLOTHES_NAME_MAP = new Map([
@@ -26,6 +26,10 @@ const CLOTHES_NAME_MAP = new Map([
 
 async function dumpFile(url: string, filePath: string): Promise<void> {
     return new Promise<void>((resolve, reject) => {
+        if (fs.existsSync(filePath)) {
+            return resolve();
+        }
+
         const dirname = path.dirname(filePath);
         fs.mkdir(dirname, {recursive: true}, (err) => {
             axios({ url: url, method: 'GET', responseType: 'stream' })
@@ -39,7 +43,10 @@ async function dumpFile(url: string, filePath: string): Promise<void> {
                         const writeStream = fs.createWriteStream(filePath);
                         res.data.pipe(writeStream);
 
-                        writeStream.on('finish', resolve);
+                        writeStream.on('finish', () => {
+                            console.log(`dumped: ${url}`);
+                            resolve();
+                        });
                         writeStream.on('error', reject);
                     }
                 }

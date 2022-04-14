@@ -5,12 +5,14 @@ import { exit } from 'process';
 (
     async () => {
         if (isMainThread) {
-            await dumper.clearPreviousDump().catch(console.error);
+            //await dumper.clearPreviousDump().catch(console.error);
+
             const workers = [
                 new Worker(__filename, { workerData: 0 }),
                 new Worker(__filename, { workerData: 1 }),
                 new Worker(__filename, { workerData: 2 })
             ];
+            
             let finishCount = 0;
             workers.forEach(w => {
                 w.on('exit', (code) => {
