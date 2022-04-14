@@ -5,7 +5,7 @@ import axios from 'axios';
 export const CONFIG = {
     DUMP_PATH: process.env.INIT_CWD + '/dump',
     ITEM_ITERATION: 500,
-    COLOR_ITERATION: 50
+    COLOR_ITERATION: 30
 };
 
 const CLOTHES_NAME_MAP = new Map([
@@ -58,7 +58,6 @@ export async function dumpClothes(isMale: boolean = true): Promise<void> {
                 for (let n = 0; n < CONFIG.COLOR_ITERATION; n++) {
                     await dumpFile(`https://launcher.gta5grand.com/game/images/${gender}/${id}/${i}_${n}.png`, `${CONFIG.DUMP_PATH}\\clothes\\${gender}\\${name}\\${i}_${n}.png`)
                         .catch(console.error);
-                    console.log('dumped: '+ `https://launcher.gta5grand.com/game/images/${gender}/${id}/${i}_${n}.png`)
                 }
             }
         })
@@ -72,7 +71,6 @@ export async function dumpOtherItems() {
         for (let i = 0; i < CONFIG.ITEM_ITERATION; i++) {
             await dumpFile(`https://launcher.gta5grand.com/game/images/other_items/${i}.png`, `${CONFIG.DUMP_PATH}\\other_items\\${i}.png`)
                     .catch(reject);
-            console.log('dumped: '+ `https://launcher.gta5grand.com/game/images/other_items/${i}.png`);
         }
         resolve();
     })

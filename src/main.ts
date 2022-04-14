@@ -15,14 +15,14 @@ import { exit } from 'process';
             workers.forEach(w => {
                 w.on('exit', (code) => {
                     if (code !== 0)
-                      console.error(new Error(`Worker stopped with exit code ${code}`));
+                      console.error(new Error(`=> Worker stopped with exit code ${code}`));
                     finishCount++;
                 });
             });
 
             setInterval(() => {
                 if (finishCount >= 3) {
-                    console.log('finished');
+                    console.log('=> finished dumping');
                     exit(0);
                 }
             }, 1000)
